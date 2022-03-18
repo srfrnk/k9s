@@ -31,9 +31,11 @@ type K9s struct {
 	ImageScans          ImageScans `json:"imageScans" yaml:"imageScans"`
 	Logger              Logger     `json:"logger" yaml:"logger"`
 	Thresholds          Threshold  `json:"thresholds" yaml:"thresholds"`
+	ScanForAutoPf       bool       `json:"scanForAutoPf" yaml:"scanForAutoPf"`
 	manualRefreshRate   int
 	manualHeadless      *bool
 	manualLogoless      *bool
+	manualScanForAutoPf *bool
 	manualCrumbsless    *bool
 	manualReadOnly      *bool
 	manualCommand       *string
@@ -154,6 +156,11 @@ func (k *K9s) ActiveContextNamespace() (string, error) {
 	}
 
 	return act.Namespace.Active, nil
+}
+
+// OverrideScanForAutoPf toggle the k9s logo manually.
+func (k *K9s) OverrideScanForAutoPf(b bool) {
+	k.manualScanForAutoPf = &b
 }
 
 // ActiveContextName returns the active context name.
@@ -283,6 +290,16 @@ func (k *K9s) IsLogoless() bool {
 	}
 
 	return k.UI.Logoless
+}
+
+// ScanForAutoPf returns scanForAutoPf setting.
+func (k *K9s) ShouldScanForAutoPf() bool {
+	h := k.ScanForAutoPf
+	if k.manualScanForAutoPf != nil && *k.manualScanForAutoPf {
+		h = *k.manualScanForAutoPf
+	}
+
+	return h
 }
 
 // IsCrumbsless returns crumbsless setting.
