@@ -16,6 +16,7 @@ type K9s struct {
 	EnableMouse         bool                `yaml:"enableMouse"`
 	Headless            bool                `yaml:"headless"`
 	Logoless            bool                `yaml:"logoless"`
+	ScanForAutoPf       bool                `yaml:"scanForAutoPf"`
 	Crumbsless          bool                `yaml:"crumbsless"`
 	ReadOnly            bool                `yaml:"readOnly"`
 	NoExitOnCtrlC       bool                `yaml:"noExitOnCtrlC"`
@@ -30,6 +31,7 @@ type K9s struct {
 	manualRefreshRate   int
 	manualHeadless      *bool
 	manualLogoless      *bool
+	manualScanForAutoPf *bool
 	manualCrumbsless    *bool
 	manualReadOnly      *bool
 	manualCommand       *string
@@ -80,6 +82,11 @@ func (k *K9s) OverrideLogoless(b bool) {
 	k.manualLogoless = &b
 }
 
+// OverrideScanForAutoPf toggle the k9s logo manually.
+func (k *K9s) OverrideScanForAutoPf(b bool) {
+	k.manualScanForAutoPf = &b
+}
+
 // OverrideCrumbsless tooh the crumbslessness manually.
 func (k *K9s) OverrideCrumbsless(b bool) {
 	k.manualCrumbsless = &b
@@ -125,6 +132,16 @@ func (k *K9s) IsLogoless() bool {
 	h := k.Logoless
 	if k.manualLogoless != nil && *k.manualLogoless {
 		h = *k.manualLogoless
+	}
+
+	return h
+}
+
+// ScanForAutoPf returns scanForAutoPf setting.
+func (k *K9s) ShouldScanForAutoPf() bool {
+	h := k.ScanForAutoPf
+	if k.manualScanForAutoPf != nil && *k.manualScanForAutoPf {
+		h = *k.manualScanForAutoPf
 	}
 
 	return h
