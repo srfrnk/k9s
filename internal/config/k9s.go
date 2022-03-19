@@ -35,7 +35,6 @@ type K9s struct {
 	manualRefreshRate   int
 	manualHeadless      *bool
 	manualLogoless      *bool
-	manualScanForAutoPf *bool
 	manualCrumbsless    *bool
 	manualReadOnly      *bool
 	manualCommand       *string
