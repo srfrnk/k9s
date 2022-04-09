@@ -47,6 +47,24 @@ type Pod struct {
 	Resource
 }
 
+// IsHappy check for happy deployments.
+func (p *Pod) IsHappy(po v1.Pod) bool {
+	switch po.Status.Phase {
+	case "Running":
+		return true
+	case "Succeeded":
+		return true
+	case "Pending":
+		return false
+	case "Failed":
+		return false
+	case "Unknown":
+		return false
+	default:
+		return false
+	}
+}
+
 // Get returns a resource instance if found, else an error.
 func (p *Pod) Get(ctx context.Context, path string) (runtime.Object, error) {
 	o, err := p.Resource.Get(ctx, path)

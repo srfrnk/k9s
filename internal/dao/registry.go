@@ -89,6 +89,7 @@ func AccessorFor(f Factory, gvr client.GVR) (Accessor, error) {
 		client.NewGVR("helm"):                                              &HelmChart{},
 		client.NewGVR("helm-history"):                                      &HelmHistory{},
 		client.NewGVR("apiextensions.k8s.io/v1/customresourcedefinitions"): &CustomResourceDefinition{},
+		client.NewGVR("dashboard"):                                         &Dashboard{},
 		// !!BOZO!! Popeye
 		//client.NewGVR("popeye"):                 &Popeye{},
 	}
@@ -308,6 +309,13 @@ func loadK9s(m ResourceMetas) {
 		SingularName: "scan",
 		Verbs:        []string{},
 		Categories:   []string{k9sCat},
+	}
+	m[client.NewGVR("dashboard")] = metav1.APIResource{
+		Name:         "dashboard",
+		Kind:         "Dashboard",
+		SingularName: "dashboard",
+		Verbs:        []string{},
+		Categories:   []string{"k9s"},
 	}
 }
 
