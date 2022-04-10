@@ -343,6 +343,9 @@ func (t *Table) buildRow(r int, re, ore model1.RowEvent, h model1.Header, pads M
 			continue
 		}
 
+		if h[c].Hide {
+			continue
+		}
 		if h[c].Name == "NAMESPACE" && !t.GetModel().ClusterWide() {
 			continue
 		}
