@@ -25,3 +25,4 @@ kind
 *.snap
 /stresser
 release
+__debug_bin
