@@ -4,6 +4,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+env:
+  VERSION: v1.0.${{github.run_number}}
 jobs:
   build-linux:
     runs-on: ubuntu-latest
@@ -86,15 +88,14 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artifacts
-
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: v1.0.${{github.run_number}}
-          tag_name: ${{github.run_number}}
+          name: ${{env.VERSION}}
+          tag_name: ${{env.VERSION}}
           draft: false
           prerelease: false
           files: ${{steps.download.outputs.download-path}}/*.gz
