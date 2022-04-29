@@ -43,4 +43,4 @@ run: build
 
 release: build
 	-mkdir ./release
-	tar -czf ./release/k9s_${GOOS}_${GOARCH}.gz ./execs/k9s
+	tar -czf ./release/k9s_${GOOS}_${GOARCH}.gz -C ./execs k9s
