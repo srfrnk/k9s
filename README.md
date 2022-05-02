@@ -1,5 +1,78 @@
 <img src="assets/k9s.png" alt="k9s">
 
+## K9s My Revision
+
+This cloned repo is my own revision for [K9s](https://github.com/derailed/k9s).
+Below is the original readme, in this section you cana find the changelog from the original version.
+
+### Auto Pod Port Forwards
+`K9s` supports [identifying pod port forwards from annotations](#fastforwards).
+
+In this revision this support is extended so that any pod (within any namespace) with these annotations will be picked up automatically and port forwards to it will be created appropriately.
+
+To activate auto pod port forwarding you need to set the configuration as follows in the `config.yml` file ([See example](./example_config/k9s/config.yml)):
+```yaml
+k9s:
+  scanForAutoPf: true
+```
+
+Once configuration enables the feature a scan is automatically performed when `K9s` is started. If at any time you need to re-scan the pods use `ctrl+p`. Port forwards can then be viewed and managed via the `portforwards` command.
+
+### Dashboard
+
+A new command `dashboard` allows viewing the state of any objects within a namespace (or all namespaces).
+
+The dashboard view can be customized via a `dasboard.yml` configuration file with the following schema ([See example](example_config/k9s/dashboard.yml)):
+```yaml
+gvrs:
+  <GVR>:
+    active: <BOOLEAN>
+    colors:
+      modified: <JQ QUERY STRING>
+      added: <JQ QUERY STRING>
+      pending: <JQ QUERY STRING>
+      error: <JQ QUERY STRING>
+      std: <JQ QUERY STRING>
+      highlight: <JQ QUERY STRING>
+      kill: <JQ QUERY STRING>
+      completed: <JQ QUERY STRING>
+    columns:
+      <COLUMN NAME>: <JQ QUERY STRING>
+```
+
+- `GVR`s can be any legal K8s GVR - e.g. `apps/v1/deployments`
+- `active` When true this GVR would be displayed in the dashboard, otherwise it would not.
+- `colors` Can contain [`jq` query string](https://stedolan.github.io/jq/) per "color". Objects matching the query would be counted towards the color. Row color would be determined with the following order of precedence:
+  - errors
+  - highlight
+  - kill
+  - pending
+  - modified
+  - added
+  - completed
+  - std
+- `columns` Can contains one or more custom column names along with a [`jq` query string](https://stedolan.github.io/jq/). The column will display the count of objects matching the query
+
+### Example Configs
+A folder with examples of config files for `K9s` can be found [here](example_config/k9s).
+These can be copied to your `K9s` configuration path.
+To find that path use the following command:
+```bash
+$ k9s info
+ ____  __.________
+|    |/ _/   __   \______
+|      < \____    /  ___/
+|    |  \   /    /\___ \
+|____|__ \ /____//____  >
+        \/            \/
+
+Configuration:   /home/********/.config/k9s/config.yml
+Logs:            /tmp/k9s-********.log
+Screen Dumps:    /tmp/k9s-screens-********
+```
+
+The `Configuration` output will show where your main `config.yml` file is located. The directory it resides in is your configuration path and should contain any other configuration file.
+
 ## K9s - Kubernetes CLI To Manage Your Clusters In Style!
 
 K9s provides a terminal UI to interact with your Kubernetes clusters.
@@ -355,7 +428,7 @@ K9s uses aliases to navigate most K8s resources.
           - default
         view:
           active: dp
-    # The path to screen dump. Default: '%temp_dir%/k9s-screens-%username%' (k9s info) 
+    # The path to screen dump. Default: '%temp_dir%/k9s-screens-%username%' (k9s info)
     screenDumpDir: /tmp
   ```
 
