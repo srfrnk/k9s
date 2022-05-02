@@ -5,11 +5,11 @@ gvrs:
     active: true
     colors:
       modified: ".status.replicas==.status.availableReplicas"
-      pending: ".spec.replicas<.status.availableReplicas"
-      error: ".spec.replicas>.status.availableReplicas"
+      pending: ".status.replicas<.status.availableReplicas"
+      error: ".status.replicas>.status.availableReplicas"
     columns:
       READY: ".status.replicas==.status.availableReplicas"
-      SCALING: ".spec.replicas!=.status.availableReplicas"
+      SCALING: ".status.replicas!=.status.availableReplicas"
   v1/pods:
     active: true
     colors:
@@ -19,7 +19,7 @@ gvrs:
       completed: '.status.phase=="Succeeded"'
     columns:
       READY: '.status.conditions[] | select(.type=="Ready" and .status=="True")'
-      ERRORS: '.status.conditions[] | select(.type=="Ready" and .status=="True")'
+      ERRORS: '.status.phase=="Failed" or .status.phase=="Unknown"'
   apps/v1/statefulsets:
     active: true
     colors:
