@@ -6,11 +6,13 @@ This cloned repo is my own revision for [K9s](https://github.com/derailed/k9s).
 Below is the original readme, in this section you cana find the changelog from the original version.
 
 ### Auto Pod Port Forwards
+
 `K9s` supports [identifying pod port forwards from annotations](#fastforwards).
 
 In this revision this support is extended so that any pod (within any namespace) with these annotations will be picked up automatically and port forwards to it will be created appropriately.
 
 To activate auto pod port forwarding you need to set the configuration as follows in the `config.yml` file ([See example](./example_config/k9s/config.yml)):
+
 ```yaml
 k9s:
   scanForAutoPf: true
@@ -23,6 +25,7 @@ Once configuration enables the feature a scan is automatically performed when `K
 A new command `dashboard` allows viewing the state of any objects within a namespace (or all namespaces).
 
 The dashboard view can be customized via a `dasboard.yml` configuration file with the following schema ([See example](example_config/k9s/dashboard.yml)):
+
 ```yaml
 gvrs:
   <GVR>:
@@ -54,9 +57,11 @@ gvrs:
 - `columns` Can contains one or more custom column names along with a [`jq` query string](https://stedolan.github.io/jq/). The column will display the count of objects matching the query
 
 ### Example Configs
+
 A folder with examples of config files for `K9s` can be found [here](example_config/k9s).
 These can be copied to your `K9s` configuration path.
 To find that path use the following command:
+
 ```bash
 $ k9s info
  ____  __.________
@@ -141,8 +146,8 @@ Please refer to our [K9s documentation](https://k9scli.io) site for installation
 
 Wanna discuss K9s features with your fellow `K9sers` or simply show your support for this tool?
 
-* Channel: [K9ersSlack](https://k9sers.slack.com/)
-* Invite: [K9slackers Invite](https://join.slack.com/t/k9sers/shared_invite/enQtOTA5MDEyNzI5MTU0LWQ1ZGI3MzliYzZhZWEyNzYxYzA3NjE0YTk1YmFmNzViZjIyNzhkZGI0MmJjYzhlNjdlMGJhYzE2ZGU1NjkyNTM)
+- Channel: [K9ersSlack](https://k9sers.slack.com/)
+- Invite: [K9slackers Invite](https://join.slack.com/t/k9sers/shared_invite/enQtOTA5MDEyNzI5MTU0LWQ1ZGI3MzliYzZhZWEyNzYxYzA3NjE0YTk1YmFmNzViZjIyNzhkZGI0MmJjYzhlNjdlMGJhYzE2ZGU1NjkyNTM)
 
 ## Installation
 
@@ -247,12 +252,12 @@ Binaries for Linux, Windows and Mac are available as tarballs in the [release pa
  K9s is currently using GO v1.23.X or above.
  In order to build K9s from source you must:
 
- 1. Clone the repo
- 2. Build and run the executable
+1.  Clone the repo
+2.  Build and run the executable
 
-      ```shell
-      make build && ./execs/k9s
-      ```
+    ```shell
+    make build && ./execs/k9s
+    ```
 
 ---
 
@@ -260,49 +265,49 @@ Binaries for Linux, Windows and Mac are available as tarballs in the [release pa
 
 ### Running the official Docker image
 
-  You can run k9s as a Docker container by mounting your `KUBECONFIG`:
+You can run k9s as a Docker container by mounting your `KUBECONFIG`:
 
-  ```shell
-  docker run --rm -it -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s
-  ```
+```shell
+docker run --rm -it -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s
+```
 
-  For default path it would be:
+For default path it would be:
 
-  ```shell
-  docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/derailed/k9s
-  ```
+```shell
+docker run --rm -it -v ~/.kube/config:/root/.kube/config quay.io/derailed/k9s
+```
 
 ### Building your own Docker image
 
-  You can build your own Docker image of k9s from the [Dockerfile](Dockerfile) with the following:
+You can build your own Docker image of k9s from the [Dockerfile](Dockerfile) with the following:
 
   ```shell
   docker build -t k9s-docker:v0.0.1 .
   ```
 
-  You can get the latest stable `kubectl` version and pass it to the `docker build` command with the `--build-arg` option.
-  You can use the `--build-arg` option to pass any valid `kubectl` version (like `v1.18.0` or `v1.19.1`).
+You can get the latest stable `kubectl` version and pass it to the `docker build` command with the `--build-arg` option.
+You can use the `--build-arg` option to pass any valid `kubectl` version (like `v1.18.0` or `v1.19.1`).
 
-  ```shell
-  KUBECTL_VERSION=$(make kubectl-stable-version 2>/dev/null)
-  docker build --build-arg KUBECTL_VERSION=${KUBECTL_VERSION} -t k9s-docker:0.1 .
-  ```
+```shell
+KUBECTL_VERSION=$(make kubectl-stable-version 2>/dev/null)
+docker build --build-arg KUBECTL_VERSION=${KUBECTL_VERSION} -t k9s-docker:0.1 .
+```
 
-  Run your container:
+Run your container:
 
-  ```shell
-  docker run --rm -it -v ~/.kube/config:/root/.kube/config k9s-docker:0.1
-  ```
+```shell
+docker run --rm -it -v ~/.kube/config:/root/.kube/config k9s-docker:0.1
+```
 
 ---
 
 ## PreFlight Checks
 
-* K9s uses 256 colors terminal mode. On `Nix system make sure TERM is set accordingly.
+- K9s uses 256 colors terminal mode. On `Nix system make sure TERM is set accordingly.
 
-    ```shell
-    export TERM=xterm-256color
-    ```
+  ```shell
+  export TERM=xterm-256color
+  ```
 
 * In order to issue resource edit commands make sure your EDITOR and KUBE_EDITOR env vars are set.
 
@@ -448,11 +453,11 @@ K9s uses aliases to navigate most K8s resources.
 
   K9s keeps its configurations as YAML files inside of a `k9s` directory and the location depends on your operating system. K9s leverages [XDG](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) to load its various configurations files. For information on the default locations for your OS please see [this link](https://github.com/adrg/xdg/blob/master/README.md). If you are still confused a quick `k9s info` will reveal where k9s is loading its configurations from. Alternatively, you can set `K9S_CONFIG_DIR` to tell K9s the directory location to pull its configurations from.
 
-  | Unix            | macOS                              | Windows               |
-  |-----------------|------------------------------------|-----------------------|
-  | `~/.config/k9s` | `~/Library/Application Support/k9s` | `%LOCALAPPDATA%\k9s`  |
+| Unix            | macOS                               | Windows              |
+| --------------- | ----------------------------------- | -------------------- |
+| `~/.config/k9s` | `~/Library/Application Support/k9s` | `%LOCALAPPDATA%\k9s` |
 
-  > NOTE: This is still in flux and will change while in pre-release stage!
+> NOTE: This is still in flux and will change while in pre-release stage!
 
 You can now override the context portForward default address configuration by setting an env variable that can override all clusters portForward local address using `K9S_DEFAULT_PF_ADDRESS=a.b.c.d`
 
@@ -628,7 +633,7 @@ In order to surface hotkeys globally please follow these steps:
  Not feeling so hot? Your custom hotkeys will be listed in the help view `?`.
  Also your hotkeys file will be automatically reloaded so you can readily use your hotkeys as you define them.
 
- You can choose any keyboard shortcuts that make sense to you, provided they are not part of the standard K9s shortcuts list.
+You can choose any keyboard shortcuts that make sense to you, provided they are not part of the standard K9s shortcuts list.
 
  Similarly, referencing environment variables in hotkeys is also supported. The available environment variables can refer to the description in the [Plugins](#plugins) section.
 
@@ -681,7 +686,7 @@ spec:
 
 The annotation value must specify a container to forward to as well as a local port and container port. The container port may be specified as either a port number or port name. If the local port is omitted then the local port will default to the container port number. Here are a few examples:
 
-1. bozo::http      - creates a pf on container `bozo` with port name http. If http specifies port number 8080 then the local port will be 8080 as well.
+1. bozo::http - creates a pf on container `bozo` with port name http. If http specifies port number 8080 then the local port will be 8080 as well.
 2. bozo::9090:http - creates a pf on container `bozo` mapping local port 9090->http(8080)
 3. bozo::9090:8080 - creates a pf on container `bozo` mapping local port 9090->8080
 
@@ -739,20 +744,20 @@ A plugin is defined as follows:
 
 K9s does provide additional environment variables for you to customize your plugins arguments. Currently, the available environment variables are as follows:
 
-* `$RESOURCE_GROUP` -- the selected resource group
-* `$RESOURCE_VERSION` -- the selected resource api version
-* `$RESOURCE_NAME` -- the selected resource name
-* `$NAMESPACE` -- the selected resource namespace
-* `$NAME` -- the selected resource name
-* `$CONTAINER` -- the current container if applicable
-* `$FILTER` -- the current filter if any
-* `$KUBECONFIG` -- the KubeConfig location.
-* `$CLUSTER` the active cluster name
-* `$CONTEXT` the active context name
-* `$USER` the active user
-* `$GROUPS` the active groups
-* `$POD` while in a container view
-* `$COL-<RESOURCE_COLUMN_NAME>` use a given column name for a viewed resource. Must be prefixed by `COL-`!
+- `$RESOURCE_GROUP` -- the selected resource group
+- `$RESOURCE_VERSION` -- the selected resource api version
+- `$RESOURCE_NAME` -- the selected resource name
+- `$NAMESPACE` -- the selected resource namespace
+- `$NAME` -- the selected resource name
+- `$CONTAINER` -- the current container if applicable
+- `$FILTER` -- the current filter if any
+- `$KUBECONFIG` -- the KubeConfig location.
+- `$CLUSTER` the active cluster name
+- `$CONTEXT` the active context name
+- `$USER` the active user
+- `$GROUPS` the active groups
+- `$POD` while in a container view
+- `$COL-<RESOURCE_COLUMN_NAME>` use a given column name for a viewed resource. Must be prefixed by `COL-`!
 
 Curly braces can be used to embed an environment variable inside another string, or if the column name contains special characters. (e.g. `${NAME}-example` or `${COL-%CPU/L}`)
 
@@ -772,17 +777,17 @@ plugins:
     dangerous: false
     description: Pod logs
     scopes:
-    - pods
+      - pods
     command: kubectl
     background: false
     args:
-    - logs
-    - -f
-    - $NAME
-    - -n
-    - $NAMESPACE
-    - --context
-    - $CONTEXT
+      - logs
+      - -f
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
 ```
 
 > NOTE: This is an experimental feature! Options and layout may change in future K9s releases as this feature solidifies.
@@ -797,10 +802,10 @@ To setup a port-forward, you will need to navigate to the PodView, select a pod 
 
 Initially, the benchmarks will run with the following defaults:
 
-* Concurrency Level: 1
-* Number of Requests: 200
-* HTTP Verb: GET
-* Path: /
+- Concurrency Level: 1
+- Number of Requests: 200
+- HTTP Verb: GET
+- Path: /
 
 The PortForward view is backed by a new K9s config file namely: `$XDG_DATA_HOME/k9s/clusters/clusterX/contextY/benchmarks.yaml`. Each cluster you connect to will have its own bench config file, containing the name of the K8s context for the cluster. Changes to this file should automatically update the PortForward view to indicate how you want to run your benchmarks.
 
@@ -827,8 +832,7 @@ benchmarks:
       http:
         path: /bozo
         method: POST
-        body:
-          {"fred":"blee"}
+        body: { "fred": "blee" }
         header:
           Accept:
             - text/html
@@ -1048,8 +1052,8 @@ k9s:
   # General K9s styles
   body:
     fgColor: dodgerblue
-    bgColor: '#ffffff'
-    logoColor: '#0000ff'
+    bgColor: "#ffffff"
+    logoColor: "#0000ff"
   # ClusterInfoView styles.
   info:
     fgColor: lightskyblue
@@ -1079,7 +1083,7 @@ k9s:
       activeColor: skyblue
     # Resource status and update styles
     status:
-      newColor: '#00ff00'
+      newColor: "#00ff00"
       modifyColor: powderblue
       addColor: lightskyblue
       errorColor: indianred
@@ -1146,7 +1150,7 @@ K9s will most likely blow up if...
 
 ## ATTA Girls/Boys!
 
-K9s sits on top of many open source projects and libraries. Our *sincere*
+K9s sits on top of many open source projects and libraries. Our _sincere_
 appreciations to all the OSS contributors that work nights and weekends
 to make this project a reality!
 
@@ -1154,9 +1158,9 @@ to make this project a reality!
 
 ## Meet The Core Team!
 
-* [Fernand Galiana](https://github.com/derailed)
-  * <img src="assets/mail.png" width="16" height="auto" alt="email"/>  fernand@imhotep.io
-  * <img src="assets/twitter.png" width="16" height="auto" alt="twitter"/> [@kitesurfer](https://twitter.com/kitesurfer?lang=en)
+- [Fernand Galiana](https://github.com/derailed)
+  - <img src="assets/mail.png" width="16" height="auto" alt="email"/> fernand@imhotep.io
+  - <img src="assets/twitter.png" width="16" height="auto" alt="twitter"/> [@kitesurfer](https://twitter.com/kitesurfer?lang=en)
 
 * [Aleksei Romanenko](https://github.com/slimus)
 
@@ -1164,9 +1168,9 @@ We always enjoy hearing from folks who benefit from our work!
 
 ## Contributions Guideline
 
-* File an issue first prior to submitting a PR!
-* Ensure all exported items are properly commented
-* If applicable, submit a test suite against your PR
+- File an issue first prior to submitting a PR!
+- Ensure all exported items are properly commented
+- If applicable, submit a test suite against your PR
 
 ---
 
