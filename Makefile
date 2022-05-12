@@ -18,6 +18,7 @@ cover:  ## Run test coverage suite
 	@go tool cover --html=cov.out
 
 build:  ## Builds the CLI
+	@go env
 	@go build ${GO_FLAGS} \
 	-ldflags "-w -s -X ${PACKAGE}/cmd.version=${VERSION} -X ${PACKAGE}/cmd.commit=${GIT_REV} -X ${PACKAGE}/cmd.date=${DATE}" \
 	-a -tags netgo -o ${OUTPUT_BIN} main.go
@@ -36,4 +37,4 @@ run: build
 
 release: build
 	-mkdir ./release
-	tar -czf ./release/k9s_${GOOS}_${GOARCH}.gz -C ./execs k9s
+	tar -czf ./release/k9s_${GOOS}_${GOARCH}.tar.gz -C ./execs k9s
