@@ -123,7 +123,7 @@ Wanna discuss K9s features with your fellow `K9sers` or simply show your support
 
 K9s is available on Linux, macOS and Windows platforms.
 
-- Binaries for Linux, Windows and Mac are available as tarballs in the [releases](./releases) page.
+- Binaries for Linux, Windows and Mac are available as tarballs in the [releases](https://github.com/srfrnk/k9s/releases) page.
 - Download version for our OS/ARCH (e.g. "k9s_linux_amd64.tar.gz")
 - Extract to a folder in your path (`tar xzf k9s_linux_amd64.tar.gz`)
 
