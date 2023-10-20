@@ -2,13 +2,14 @@ package config
 
 import (
 	"github.com/derailed/k9s/internal/client"
+	"math"
 )
 
 const (
 	// DefaultLoggerTailCount tracks default log tail size.
 	DefaultLoggerTailCount = 100
 	// MaxLogThreshold sets the max value for log size.
-	MaxLogThreshold = 5000
+	MaxLogThreshold = math.MaxInt32
 	// DefaultSinceSeconds tracks default log age.
 	DefaultSinceSeconds = 300 // all logs
 )
