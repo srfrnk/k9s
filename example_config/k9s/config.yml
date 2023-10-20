@@ -9,8 +9,8 @@ k9s:
   readOnly: false
   noIcons: false
   logger:
-    tail: 100
-    buffer: 5000
+    tail: 100000
+    buffer: 100000
     sinceSeconds: 60
     fullScreenLogs: false
     textWrap: false
