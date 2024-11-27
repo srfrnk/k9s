@@ -33,7 +33,8 @@ import (
 	"github.com/derailed/tview"
 	"github.com/rs/zerolog/log"
 	v1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	// metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/labels"
 	k8sRuntime "k8s.io/apimachinery/pkg/runtime"
@@ -142,7 +143,7 @@ func (a *App) Init(version string, rate int) error {
 		a.initImgScanner(version)
 	}
 	a.ReloadStyles()
-	a.scheduleScanForAutoPf()
+	// a.scheduleScanForAutoPf()
 	if a.Config.K9s.ShouldScanForAutoPf() {
 		a.QueueUpdate(func() {
 			a.scanForAutoPf()
@@ -188,37 +189,37 @@ func (app *App) scanForAutoPf() {
 			log.Debug().Msg(err.Error())
 			continue
 		}
-		app.scanPodForAutoPf(pod)
+		// app.scanPodForAutoPf(pod)
 	}
 }
 
-func (app *App) scanPodForAutoPf(pod v1.Pod) {
-	if spec, ok := pod.Annotations[port.K9sAutoPortForwardsKey]; ok {
-		ports := app.getPodPorts(pod)
+// func (app *App) scanPodForAutoPf(pod v1.Pod) {
+// 	if spec, ok := pod.Annotations[port.K9sAutoPortForwardsKey]; ok {
+// 		ports := app.getPodPorts(pod)
 
-		pfs, err := port.ParsePFs(spec)
-		if err != nil {
-			log.Debug().Msg(err.Error())
-			return
-		}
+// 		pfs, err := port.ParsePFs(spec)
+// 		if err != nil {
+// 			log.Debug().Msg(err.Error())
+// 			return
+// 		}
 
-		pts, err := pfs.ToTunnels(app.Config.CurrentCluster().PortForwardAddress, ports, port.IsPortFree)
-		if err != nil {
-			log.Debug().Msg(err.Error())
-			return
-		}
+// 		pts, err := pfs.ToTunnels(app.Config.CurrentCluster().PortForwardAddress, ports, port.IsPortFree)
+// 		if err != nil {
+// 			log.Debug().Msg(err.Error())
+// 			return
+// 		}
 
-		if err := pts.CheckAvailable(); err != nil {
-			log.Debug().Msg(err.Error())
-			return
-		}
+// 		if err := pts.CheckAvailable(); err != nil {
+// 			log.Debug().Msg(err.Error())
+// 			return
+// 		}
 
-		path := client.FQN(pod.Namespace, pod.Name)
-		for _, pt := range pts {
-			app.startPortForward(path, pt)
-		}
-	}
-}
+// 		path := client.FQN(pod.Namespace, pod.Name)
+// 		for _, pt := range pts {
+// 			app.startPortForward(path, pt)
+// 		}
+// 	}
+// }
 
 func (app *App) getPodPorts(pod v1.Pod) port.ContainerPortSpecs {
 	podPorts := make(map[string][]v1.ContainerPort, len(pod.Spec.Containers))

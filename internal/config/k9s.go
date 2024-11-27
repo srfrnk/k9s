@@ -157,10 +157,10 @@ func (k *K9s) ActiveContextNamespace() (string, error) {
 	return act.Namespace.Active, nil
 }
 
-// OverrideScanForAutoPf toggle the k9s logo manually.
-func (k *K9s) OverrideScanForAutoPf(b bool) {
-	k.manualScanForAutoPf = &b
-}
+// // OverrideScanForAutoPf toggle the k9s logo manually.
+// func (k *K9s) OverrideScanForAutoPf(b bool) {
+// 	k.manualScanForAutoPf = &b
+// }
 
 // ActiveContextName returns the active context name.
 func (k *K9s) ActiveContextName() string {

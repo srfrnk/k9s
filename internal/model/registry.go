@@ -91,10 +91,10 @@ var Registry = map[string]ResourceMeta{
 	//	DAO:          &dao.Popeye{},
 	//	TreeRenderer: &xray.Section{},
 	//},
-	"dashboard": {
-		DAO:      &dao.Dashboard{},
-		Renderer: &render.Dashboard{},
-	},
+	// "dashboard": {
+	// 	DAO:      &dao.Dashboard{},
+	// 	Renderer: &render.Dashboard{},
+	// },
 	// Core...
 	"v1/endpoints": {
 		Renderer: &render.Endpoints{},

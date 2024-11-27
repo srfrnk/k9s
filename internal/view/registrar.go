@@ -97,9 +97,9 @@ func miscViewers(vv MetaViewers) {
 	vv[client.NewGVR("sanitizer")] = MetaViewer{
 		viewerFn: NewSanitizer,
 	}
-	vv[client.NewGVR("dashboard")] = MetaViewer{
-		viewerFn: NewDashboard,
-	}
+	// vv[client.NewGVR("dashboard")] = MetaViewer{
+	// 	viewerFn: NewDashboard,
+	// }
 }
 
 func appsViewers(vv MetaViewers) {

@@ -89,7 +89,7 @@ func AccessorFor(f Factory, gvr client.GVR) (Accessor, error) {
 		client.NewGVR("helm"):                                              &HelmChart{},
 		client.NewGVR("helm-history"):                                      &HelmHistory{},
 		client.NewGVR("apiextensions.k8s.io/v1/customresourcedefinitions"): &CustomResourceDefinition{},
-		client.NewGVR("dashboard"):                                         &Dashboard{},
+		// client.NewGVR("dashboard"):                                         &Dashboard{},
 		// !!BOZO!! Popeye
 		//client.NewGVR("popeye"):                 &Popeye{},
 	}
