@@ -27,6 +27,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: artifacts
+          overwrite: true
           path: ./release/k9s_${{ matrix.goos }}_${{ matrix.goarch }}.tar.gz
 
   build-darwin:
@@ -49,6 +50,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: artifacts
+          overwrite: true
           path: ./release/k9s_${{ matrix.goos }}_${{ matrix.goarch }}.tar.gz
 
   build-windows:
@@ -71,6 +73,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: artifacts
+          overwrite: true
           path: ./release/k9s_${{ matrix.goos }}_${{ matrix.goarch }}.tar.gz
 
   release:
